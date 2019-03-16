@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>tic tac toc game</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="style/index.css">
+        
+    </head>
+    <body>
+         <div class="game-bar">
+            <label id="show-game-state" style="flex-grow: 6;">player 1 turn</label>
+            <button onclick="newGame()" style="flex-grow: 4;"> New Game</button>
+            </div>
+        <main>
+            <div class="game-interface">
+                
+                
+                   <div style="flex-grow:2;">
+                    <label >one player</label>
+                    <input type="radio" name="players-number" value="1"   checked/>
+                 </div>
+                <div style="flex-grow: 2">
+                    <label>two players</label>
+                    <input type="radio" name="players-number" value="2"/>
+                </div>
+                
+                
+                
+                 <div style="flex-grow: 2">
+                    <label  > 3 X 3</label>
+                    <input type="radio" name="num-of-cells" value="3"  checked>
+                </div>
+                 <div style="flex-grow: 2">
+                    <label  > 4 X 4</label>
+                    <input type="radio" name="num-of-cells" value="4"  >
+                </div>
+                
+                <button  style="flex-grow: 2;" type="submit" onclick="startGame()" >start game</button>
+                
+        
+            </div>
+           
+            <div class="game-board">
+              <!-- <div class="game-cell" id="00" onclick="evalPlayerMove(0,0,this)"><p>X</p></div>
+                <div class="game-cell" id="01"onclick="evalPlayerMove(0,1,this)" ><p>O</p></div>
+                <div class="game-cell" id="02" onclick="evalPlayerMove(0,2,this)"><p>&nbsp;</p></div>
+                <div class="game-cell" id="10"onclick="evalPlayerMove(1,0,this)" ><p>&nbsp;</p></div>
+                <div class="game-cell" id="11"onclick="evalPlayerMove(1,1,this)" ><p>&nbsp;</p></div>
+                <div class="game-cell" id="12"onclick="evalPlayerMove(1,2,this)" ><p>&nbsp;</p></div>
+                <div class="game-cell" id="20"onclick="evalPlayerMove(2,0,this)" ><p>&nbsp;</p></div>
+                <div class="game-cell" id="21"onclick="evalPlayerMove(2,1,this)" ><p>&nbsp;</p></div>
+                <div class="game-cell" id="22"onclick="evalPlayerMove(2,2,this)" ><p>&nbsp;</p></div> -->
+            </div>
+        </main>
+        <script type="text/javascript"src="js/index.js"></script>
+    </body>
+</html>
