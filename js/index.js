@@ -2,9 +2,72 @@ let playerTurn=2;
 let gameBoard=[];
 let lengthOfRow=3;
 let playerSymbol=["X","O"];
-let playerInfo=["player1 turn","player2 turn"];
+let playerInfo=["player1 :","player2 :"];
 let computerPlay=false;
 let gameFinished=false;
+function checkRow(row){
+     if(row.every((elem)=>{ return elem==="X";})){
+            return true;
+        }
+        else if(row.every((elem)=>{ return elem==="O";})){
+            return true;
+        }
+    return false;
+}
+function checkHorizontalRows(board){
+    // everry array in gameBoard as row
+    let len=board.length;
+    for(let i=0; i<len;i++){
+        if(checkRow(board[i])){return true;}
+    }
+    return false;
+}
+function checkVerticallRows(board){
+    //row like 0 0 1 0 2 0 3 0
+     let len=board.length;
+    for(let i =0 ; i<len;i++){
+        let temp=[];
+        for(let j =0;j<len;j++){
+            //look we don't do i j but j i
+            temp.push(board[j][i]);
+            
+        }
+        if(checkRow(temp)){return true;}
+    }
+    return false;
+}
+function checkCrossRows(board){
+    //row like 0 0 1 1 2 2 3 3
+    let len=board.length;
+    let temp1=[];// for 0 0 1 1 2 2
+    let temp2=[];//for 2 0  1 1   0 2
+    for(let i=0;i<len;i++){
+        temp1.push(board[i][i]);
+        temp2.push(board[i][len-1-i]);
+        
+    }
+    if(checkRow(temp1) || checkRow(temp2)){
+        return true;
+    }
+    return false;
+    
+    
+    
+}
+function isWin(board){
+    return checkHorizontalRows(board) || checkVerticallRows(board) || checkCrossRows(board);
+}
+function isTie(board){
+    alert("t");
+    let len=board.length;
+    for(let i=0;i<len;i++){
+        for(let j=0;j<len;j++){
+            if(board[i][j]!=="X" && board[i][j]!=="O"){return false;}
+        }
+    }
+    alert("tt");
+    return true;
+}
 function makeGameBoard(lenOfRow){
     let arr=[];
     for(let i=0;i<lenOfRow;i++){
@@ -44,14 +107,25 @@ function computerTurn(len){
     
 }
 function evalPlayerMove(i,j,cell){
-    alert(gameBoard)
+    
      if(gameBoard[i][j]!==3 || gameFinished){
-        alert(i+" "+j);
+    
          return;
      }
      gameBoard[i][j]=playerSymbol[playerTurn%2];
      cell.querySelector("p").textContent=playerSymbol[playerTurn%2];
     //isplayerwin
+    if(isWin(gameBoard)){
+        gameFinished=true;
+        document.querySelector("#show-game-state").textContent=playerInfo[playerTurn%2]+" win!";
+        return;
+        
+        }
+    if(isTie(gameBoard)){
+        gameFinished=true;
+        document.querySelector("#show-game-state").textContent="tie!!!!!";
+        return;
+    }
     playerTurn++;//so computer will play if true
     if(computerPlay ){
         
@@ -63,7 +137,7 @@ function evalPlayerMove(i,j,cell){
         playerTurn++;
     }
     else{
-        document.querySelector("#show-game-state").textContent=playerInfo[playerTurn%2];
+        document.querySelector("#show-game-state").textContent=playerInfo[playerTurn%2]+" turn";
     }
 }
 
@@ -84,7 +158,7 @@ let gameBar=document.querySelector(".game-bar");
 gameBar.style.display="flex";
 }
 function newGame(){
-    playerTurn=1;
+    playerTurn=2;
     gameBoard=[];
     computerPlay=false;
     gameFinished=false;
